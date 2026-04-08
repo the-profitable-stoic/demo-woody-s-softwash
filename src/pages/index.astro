@@ -1,0 +1,1562 @@
+---
+/**
+ * Recipe: Dark Premium
+ * Category: Power Washing
+ * Reference: Young Construction (youngconstructionnorthiowa.com)
+ *
+ * A complete self-contained homepage recipe.
+ * Near-black backgrounds with orange accent, Space Grotesk headings, bold dark aesthetic.
+ * NO external component imports — everything inline.
+ */
+import BaseLayout from "../layouts/BaseLayout.astro";
+import StickyMinimal from "../../components/nav/StickyMinimal.astro";
+import MultiColumn from "../../components/footer/MultiColumn.astro";
+import { siteConfig } from "../lib/site-config";
+import { getSeoForPage } from "../lib/seo";
+
+const seo = getSeoForPage("homepage");
+const biz = siteConfig.business;
+const content = siteConfig.content;
+const homepage = content.homepage;
+const services = content.services;
+const serviceAreas = content.serviceAreas;
+const reviews = content.reviews;
+const info = content.companyInfo;
+const images = siteConfig.images;
+const heroR = (images as any).heroResponsive;
+const servicesR = (images as any).servicesResponsive || {};
+
+const displayServices = services.slice(0, 6);
+const displayAreas = serviceAreas.slice(0, 8);
+const displayReviews = reviews.slice(0, 6);
+const galleryImages = images.gallery?.length ? images.gallery.slice(0, 6) : Object.values(images.services || {}).slice(0, 3);
+const firstFaq = services[0]?.faq || [];
+
+// Slug-to-display-name mapping
+
+const ACRONYMS = new Set(["hvac", "ac", "bbq", "rv", "atv", "suv"]);
+function nicheDisplayName(input: string): string {
+  return input.split(/[\s-]+/).map(word => {
+    if (ACRONYMS.has(word.toLowerCase())) return word.toUpperCase();
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }).join(" ");
+}
+const categoryDisplay = nicheDisplayName(biz.category);
+
+// Niche-aware language mappings
+const medicalNiches = new Set(["dentist", "chiropractor", "physical-therapy", "optometrist", "veterinarian"]);
+const autoNiches = new Set(["auto-repair", "auto-body", "auto-detailing", "towing", "tire-shop"]);
+const isMedical = medicalNiches.has(biz.category);
+const isAuto = autoNiches.has(biz.category);
+const ctaText = isMedical ? "Book an Appointment" : "Get a Free Estimate";
+const ctaAction = isMedical ? "Schedule a Visit" : isAuto ? "Get a Quote" : "Request an Estimate";
+
+// Niche display name → professional adjective form
+const NICHE_ADJECTIVES: Record<string, string> = {
+  "dentist": "Dental Care",
+  "chiropractor": "Chiropractic Care",
+  "optometrist": "Optometry",
+  "veterinarian": "Veterinary Care",
+  "physical-therapy": "Physical Therapy",
+  "auto-repair": "Auto Repair",
+  "auto-body": "Auto Body Repair",
+  "auto-detailing": "Auto Detailing",
+  "towing": "Towing",
+  "tire-shop": "Tire Service",
+  "electrical": "Electrical Services",
+  "solar": "Solar Installation",
+  "smart-home": "Smart Home Solutions",
+  "handyman": "Handyman Services",
+  "general-contractor": "General Contracting",
+  "kitchen-remodel": "Kitchen Remodeling",
+  "bath-remodel": "Bathroom Remodeling",
+  "garage-door": "Garage Door Service",
+};
+const categoryAdjective = NICHE_ADJECTIVES[biz.category] || categoryDisplay;
+
+// Article helper: "a" vs "an"
+const categoryArticle = /^[aeiou]/i.test(categoryAdjective) ? "an" : "a";
+
+
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  ogTitle={seo.ogTitle}
+  ogDescription={seo.ogDescription}
+>
+
+  <!-- ═══════════════════════════════════════════════ NAV ═══════════════════════════════════════════════ -->
+  <StickyMinimal slot="nav" />
+
+  <!-- ═══════════════════════════════════════════════ HERO ═══════════════════════════════════════════════ -->
+  <section class="dp-hero">
+    {images.hero && <img src={images.hero} alt={`${biz.name} hero`} class="dp-hero__bg" srcset={heroR?.srcset || ""} sizes="100vw" loading="eager" fetchpriority="high" />}
+    <div class="dp-hero__overlay"></div>
+    <div class="dp-hero__inner">
+      <div class="dp-hero__content">
+        <h1 class="dp-hero__headline">{homepage.heroHeadline}</h1>
+        <p class="dp-hero__subline">{homepage.heroSubline}</p>
+        {info.projectsCompleted && (
+          <div class="dp-hero__badge">
+            <span class="dp-hero__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <span>{reviews.length}+ Verified Reviews</span>
+          </div>
+        )}
+        <div class="dp-hero__buttons">
+          <a href="/contact" class="dp-btn dp-btn--primary">{ctaAction} &rarr;</a>
+          <a href="/about" class="dp-btn dp-btn--outline">Meet the Team &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ SERVICES ═══════════════════════════════════════════════ -->
+  <section class="dp-services">
+    <div class="dp-container">
+      <div class="dp-section-header">
+        <span class="dp-section-header__tag">What We Do</span>
+        <h2 class="dp-section-header__title">Our <span class="dp-accent">Services</span></h2>
+        <p class="dp-section-header__sub">{`Professional ${categoryDisplay.toLowerCase()} solutions tailored to your needs.`}</p>
+      </div>
+      <div class="dp-services__grid">
+        {displayServices.map((s) => {
+          const sImg = images.services?.[s.slug] || images.hero;
+          return (
+            <a href={`/services/${s.slug}`} class="dp-service-card">
+              {sImg && <img src={sImg} alt={s.name} class="dp-service-card__img" loading="lazy" />}
+              <div class="dp-service-card__body">
+                <h3 class="dp-service-card__title">{s.name}</h3>
+                <p class="dp-service-card__desc">{s.shortDescription}</p>
+                <span class="dp-service-card__link">Learn More &rarr;</span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ FINANCING / TRUST ═══════════════════════════════════════════════ -->
+  <section class="dp-financing">
+    <div class="dp-container">
+      <div class="dp-financing__grid">
+        <div class="dp-financing__text">
+          <span class="dp-section-header__tag">Flexible Options</span>
+          <h2 class="dp-financing__title">Financing That Works <span class="dp-accent">With Your Goals</span></h2>
+          <p class="dp-financing__desc">{`We believe every customer deserves access to top-quality ${categoryDisplay.toLowerCase()} services. That's why we offer flexible options to fit any budget. No stress, no surprises — just a clear path forward.`}</p>
+          <ul class="dp-financing__list">
+            <li>Low monthly payments</li>
+            <li>Quick approval process</li>
+            <li>No hidden fees</li>
+          </ul>
+          <a href="/contact" class="dp-btn dp-btn--primary">{isMedical ? 'Learn About Payment Options' : isAuto ? 'Explore Financing' : 'Get Pre-Approved'} &rarr;</a>
+        </div>
+        <div class="dp-financing__badges">
+          <div class="dp-trust-badge">
+            <div class="dp-trust-badge__icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="dp-trust-badge__label" role="heading" aria-level="3">{isMedical ? "Licensed & Certified" : "Licensed & Insured"}</div>
+            <p class="dp-trust-badge__text">{isMedical ? "Board-certified professionals" : "Full protection on every project"}</p>
+          </div>
+          <div class="dp-trust-badge">
+            <div class="dp-trust-badge__icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="1.5"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            </div>
+            <div class="dp-trust-badge__label" role="heading" aria-level="3">Certified Professionals</div>
+            <p class="dp-trust-badge__text">Certified professionals</p>
+          </div>
+          <div class="dp-trust-badge">
+            <div class="dp-trust-badge__icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="1.5"><path d="M14 9V5a3 3 0 00-6 0v4"/><rect x="2" y="9" width="20" height="13" rx="2"/><circle cx="12" cy="16" r="1"/></svg>
+            </div>
+            <div class="dp-trust-badge__label" role="heading" aria-level="3">{isMedical ? "Satisfaction Guaranteed" : "Warranty Protected"}</div>
+            <p class="dp-trust-badge__text">Industry-leading warranty coverage</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ TESTIMONIALS ═══════════════════════════════════════════════ -->
+  <section class="dp-testimonials">
+    <div class="dp-container">
+      <div class="dp-section-header">
+        <span class="dp-section-header__tag">Reviews</span>
+        <h2 class="dp-section-header__title">Trusted By <span class="dp-accent">Our Community</span></h2>
+      </div>
+      <div class="dp-testimonials__grid">
+        {displayReviews.map((r) => (
+          <div class="dp-review-card">
+            <div class="dp-review-card__quote">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="#FF6B35"><path d="M10 11H6.101c.001-.009.042-.476.258-1.068.405-1.113 1.12-2.105 1.683-2.685.591-.607 1.091-.982 1.49-1.153l-.788-1.611C8.07 4.789 7.337 5.252 6.638 5.87c-.701.619-1.393 1.432-1.947 2.478C4.137 9.393 3.784 10.697 3.7 12.28c-.019.341-.03.686-.03 1.036v4.684h6.33V11zm10 0h-3.899c.001-.009.042-.476.258-1.068.405-1.113 1.12-2.105 1.683-2.685.591-.607 1.091-.982 1.49-1.153l-.788-1.611c-.674.306-1.407.769-2.106 1.387-.701.619-1.393 1.432-1.947 2.478-.554 1.045-.907 2.349-.991 3.932-.019.341-.03.686-.03 1.036v4.684h6.33V11z"/></svg>
+            </div>
+            <p class="dp-review-card__text">{r.text}</p>
+            <div class="dp-review-card__footer">
+              <span class="dp-review-card__name">{r.name}</span>
+              <div class="dp-review-card__stars">
+                {Array.from({ length: r.rating || 5 }).map(() => (
+                  <span class="dp-star">&#9733;</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="dp-testimonials__cta">
+        <a href="/reviews" class="dp-btn dp-btn--outline">Read All Reviews &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ PROCESS ═══════════════════════════════════════════════ -->
+  <section class="dp-process">
+    <div class="dp-container">
+      <div class="dp-section-header">
+        <span class="dp-section-header__tag">How It Works</span>
+        <h2 class="dp-section-header__title">We'll Guide You <span class="dp-accent">Through!</span></h2>
+        <p class="dp-section-header__sub">From first call to final walkthrough, here's what to expect.</p>
+      </div>
+      <div class="dp-process__grid">
+        <div class="dp-process-step">
+          <div class="dp-process-step__number">01</div>
+          <h3 class="dp-process-step__title">Contact Our Team</h3>
+          <p class="dp-process-step__desc">Reach out by phone or through our online form. We'll schedule a time that works best for you.</p>
+        </div>
+        <div class="dp-process-step">
+          <div class="dp-process-step__number">02</div>
+          <h3 class="dp-process-step__title">{isMedical ? "Assessment" : "Inspection"}</h3>
+          <p class="dp-process-step__desc">{isMedical ? "Our team will thoroughly assess your needs and discuss the best options for your care." : `Our certified team will thoroughly evaluate your needs and provide a detailed, transparent estimate.`}</p>
+        </div>
+        <div class="dp-process-step">
+          <div class="dp-process-step__number">03</div>
+          <h3 class="dp-process-step__title">We Get to Work</h3>
+          <p class="dp-process-step__desc">{isMedical ? "Our experienced team handles everything with precision and care, ensuring your comfort throughout." : "Our experienced team handles everything — from start to finish — with precision and care."}</p>
+        </div>
+        <div class="dp-process-step">
+          <div class="dp-process-step__number">04</div>
+          <h3 class="dp-process-step__title">{isMedical ? "Follow-Up" : "Final Walkthrough"}</h3>
+          <p class="dp-process-step__desc">{isMedical ? "We follow up to ensure your complete satisfaction and answer any questions about your ongoing care." : "We walk through the completed work with you to ensure every detail meets our high standards."}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ ABOUT / COMMUNITY ═══════════════════════════════════════════════ -->
+  <section class="dp-about">
+    <div class="dp-container">
+      <div class="dp-about__grid">
+        <div class="dp-about__text">
+          <span class="dp-section-header__tag">Who We Are</span>
+          <h2 class="dp-about__title">A Local Business For Your <span class="dp-accent">Local Community</span></h2>
+          <p class="dp-about__desc">{info.about || `${biz.name} is proud to serve our neighbors with honest, quality service. We're not just ${categoryArticle} ${categoryAdjective.toLowerCase()} company — we're your community partner dedicated to delivering excellence. {isMedical ? "Every patient we serve reflects our commitment to quality" : "Every job we take on reflects our commitment to quality"} and the trust our customers place in us.`}</p>
+          <div class="dp-about__stats">
+            {info.yearsInBusiness && (
+              <div class="dp-about__stat">
+                <span class="dp-about__stat-num">{info.yearsInBusiness}+</span>
+                <span class="dp-about__stat-label">Years Experience</span>
+              </div>
+            )}
+            {info.projectsCompleted && (
+              <div class="dp-about__stat">
+                <span class="dp-about__stat-num">{info.projectsCompleted}</span>
+                <span class="dp-about__stat-label">Projects Completed</span>
+              </div>
+            )}
+          </div>
+          <a href="/about" class="dp-btn dp-btn--primary">Learn More About Us &rarr;</a>
+        </div>
+        <div class="dp-about__image">
+          {images.about && <img src={images.about} alt={`${biz.name} team`} class="dp-about__img" loading="lazy" />}
+          {!images.about && images.hero && <img src={images.hero} alt={`${biz.name} team`} class="dp-about__img" loading="lazy" />}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ SERVICE AREAS ═══════════════════════════════════════════════ -->
+  <section class="dp-areas">
+    <div class="dp-container">
+      <div class="dp-section-header">
+        <span class="dp-section-header__tag">Coverage</span>
+        <h2 class="dp-section-header__title">Serving <span class="dp-accent">{biz.state}</span> and Beyond</h2>
+        <p class="dp-section-header__sub">{`Proudly providing top-quality ${categoryDisplay.toLowerCase()} services throughout the region.`}</p>
+      </div>
+      <div class="dp-areas__grid">
+        {displayAreas.map((a) => (
+          <a href={`/service-areas/${a.slug}`} class="dp-area-card">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>{a.city}, {biz.state}</span>
+          </a>
+        ))}
+      </div>
+      <div class="dp-areas__cta">
+        <a href="/service-areas" class="dp-btn dp-btn--outline">View All Service Areas &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ VALUES ═══════════════════════════════════════════════ -->
+  <section class="dp-values">
+    <div class="dp-container">
+      <div class="dp-section-header">
+        <span class="dp-section-header__tag">Our Promise</span>
+        <h2 class="dp-section-header__title">Why Choose <span class="dp-accent">{biz.name}</span></h2>
+      </div>
+      <div class="dp-values__grid">
+        <div class="dp-value-card">
+          <div class="dp-value-card__icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          </div>
+          <h3 class="dp-value-card__title">Excellence</h3>
+          <p class="dp-value-card__desc">{isMedical ? "We hold ourselves to the highest standards for every patient — no shortcuts, no compromises." : "We hold ourselves to the highest standards on every single job — no shortcuts, no compromises."}</p>
+        </div>
+        <div class="dp-value-card">
+          <div class="dp-value-card__icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h3 class="dp-value-card__title">Community</h3>
+          <p class="dp-value-card__desc">We're your neighbors first. {isMedical ? "Every patient we help strengthens the community we call home." : "Every job we complete strengthens the community we call home."}</p>
+        </div>
+        <div class="dp-value-card">
+          <div class="dp-value-card__icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </div>
+          <h3 class="dp-value-card__title">Integrity</h3>
+          <p class="dp-value-card__desc">Honest pricing, transparent communication, and doing what we say we'll do — every single time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ FAQ ═══════════════════════════════════════════════ -->
+  {firstFaq.length > 0 && (
+    <section class="dp-faq">
+      <div class="dp-container">
+        <div class="dp-section-header">
+          <span class="dp-section-header__tag">FAQ</span>
+          <h2 class="dp-section-header__title">Your Questions, <span class="dp-accent">Our Expert Advice</span></h2>
+        </div>
+        <div class="dp-faq__list">
+          {firstFaq.map((item, idx) => (
+            <details class="dp-faq__item" open={idx === 0}>
+              <summary class="dp-faq__question">{item.question}</summary>
+              <div class="dp-faq__answer">{item.answer}</div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ═══════════════════════════════════════════════ BLOG / RESOURCES ═══════════════════════════════════════════════ -->
+    <!-- ═══════════════════════════════════════════════ FOOTER CTA ═══════════════════════════════════════════════ -->
+  <section class="dp-footer-cta">
+    <div class="dp-container">
+      <div class="dp-footer-cta__grid">
+        <div class="dp-footer-cta__text">
+          <h2 class="dp-footer-cta__headline">Excellence. Community. Integrity.<br/>That's <span class="dp-accent">{biz.name}</span>.</h2>
+          <p class="dp-footer-cta__sub">Ready to get started? Fill out the form and our team will be in touch within 24 hours.</p>
+          <a href={`tel:${biz.phone}`} class="dp-footer-cta__phone">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            {biz.phone}
+          </a>
+        </div>
+        <div class="dp-footer-cta__form-wrap">
+          <form class="dp-contact-form" action="/api/contact" method="POST">
+            <input type="text" name="name" placeholder="Full Name" required class="dp-contact-form__input" />
+            <input type="email" name="email" placeholder="Email Address" required class="dp-contact-form__input" />
+            <input type="tel" name="phone" placeholder="Phone Number" class="dp-contact-form__input" />
+            <textarea name="message" placeholder="Tell us about your project..." rows="4" class="dp-contact-form__input dp-contact-form__textarea"></textarea>
+            <label class="form-consent" style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.75rem;color:var(--color-text-light,#666);line-height:1.5;margin:0.75rem 0;"><input type="checkbox" name="consent" required style="margin-top:0.2rem;flex-shrink:0" /><span>By submitting, I consent to receive calls/texts from {biz.name} at the number provided. Msg & data rates may apply. Reply STOP to opt out. <a href="/privacy/" style="color:var(--color-primary);text-decoration:underline">Privacy Policy</a> & <a href="/terms/" style="color:var(--color-primary);text-decoration:underline">Terms</a>.</span></label>
+            <button type="submit" class="dp-btn dp-btn--primary dp-contact-form__submit">Send Message &rarr;</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ FOOTER ═══════════════════════════════════════════════ -->
+  <MultiColumn slot="footer" />
+
+  <!-- ═══════════════════════════════════════════════ SCRIPT ═══════════════════════════════════════════════ -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('dp-menu-btn');
+      const closeBtn = document.getElementById('dp-menu-close');
+      const overlay = document.getElementById('dp-mobile-overlay');
+      const panel = document.getElementById('dp-mobile-panel');
+      const nav = document.getElementById('dp-nav');
+
+      function openMenu() { panel.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+      function closeMenu() { panel.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+      if (btn) btn.addEventListener('click', openMenu);
+      if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+      if (overlay) overlay.addEventListener('click', closeMenu);
+
+      /* Sticky nav */
+      let lastScroll = 0;
+      window.addEventListener('scroll', () => {
+        const st = window.scrollY;
+        if (st > 80) { nav.classList.add('dp-nav--scrolled'); } else { nav.classList.remove('dp-nav--scrolled'); }
+        lastScroll = st;
+      });
+    });
+  </script>
+
+</BaseLayout>
+
+<!-- ═══════════════════════════════════════════════ STYLES ═══════════════════════════════════════════════ -->
+<style>
+  /* ─── FONTS ─── */
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+  /* ─── VARIABLES ─── */
+  :root {
+    --dp-bg: #111111;
+    --dp-surface: #1a1a1a;
+    --dp-surface-2: #242424;
+    --dp-orange: #FF8C5A;
+    --dp-orange-hover: #e85a25;
+    --dp-white: #F5F5F5;
+    --dp-gray: #9CA3AF;
+    --dp-border: #333333;
+    --dp-darkest: #0a0a0a;
+    --dp-font-heading: 'Space Grotesk', sans-serif;
+    --dp-font-body: 'Inter', sans-serif;
+    --dp-max-width: 1280px;
+    --dp-nav-height: 80px;
+  }
+
+  /* ─── GLOBAL OVERRIDES ─── */
+  :global(body) {
+    background: var(--dp-bg) !important;
+    color: var(--dp-white);
+    font-family: var(--dp-font-body);
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── CONTAINER ─── */
+  .dp-container {
+    max-width: var(--dp-max-width);
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  /* ─── ACCENT ─── */
+  .dp-accent {
+    color: var(--dp-orange);
+  }
+
+  /* ─── BUTTONS ─── */
+  .dp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+  }
+  .dp-btn--primary {
+    background: var(--dp-orange);
+    color: #111;
+  }
+  .dp-btn--primary:hover {
+    background: var(--dp-orange-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+  }
+  .dp-btn--outline {
+    border: 2px solid var(--dp-white);
+    color: var(--dp-white);
+    background: transparent;
+  }
+  .dp-btn--outline:hover {
+    border-color: var(--dp-orange);
+    color: var(--dp-orange);
+  }
+
+  /* ─── SECTION HEADER ─── */
+  .dp-section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+  .dp-section-header__tag {
+    display: inline-block;
+    font-family: var(--dp-font-heading);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--dp-orange);
+    margin-bottom: 0.75rem;
+  }
+  .dp-section-header__title {
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--dp-white);
+    margin: 0 0 1rem;
+    line-height: 1.15;
+  }
+  .dp-section-header__sub {
+    font-size: 1.05rem;
+    color: var(--dp-gray);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ═══════════════════════════ NAV ═══════════════════════════ */
+  .dp-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(17, 17, 17, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+    height: var(--dp-nav-height);
+  }
+  .dp-nav--scrolled {
+    background: rgba(17, 17, 17, 0.98);
+    border-bottom-color: var(--dp-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  }
+  .dp-nav__inner {
+    max-width: var(--dp-max-width);
+    margin: 0 auto;
+    padding: 0 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+  .dp-nav__brand {
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--dp-white);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .dp-nav__links {
+    display: none;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .dp-nav__link {
+    font-family: var(--dp-font-body);
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--dp-gray);
+    text-decoration: none;
+    padding: 0.5rem 0.85rem;
+    border-radius: 6px;
+    transition: color 0.2s;
+    white-space: nowrap;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .dp-nav__link:hover {
+    color: var(--dp-white);
+  }
+  .dp-nav__dropdown {
+    position: relative;
+  }
+  .dp-nav__drop-panel {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 220px;
+    background: var(--dp-surface);
+    border: 1px solid var(--dp-border);
+    border-radius: 10px;
+    padding: 0.5rem;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    z-index: 100;
+  }
+  .dp-nav__dropdown:hover .dp-nav__drop-panel {
+    display: block;
+  }
+  .dp-nav__drop-link {
+    display: block;
+    padding: 0.6rem 1rem;
+    font-size: 0.88rem;
+    color: var(--dp-gray);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .dp-nav__drop-link:hover {
+    color: var(--dp-white);
+    background: var(--dp-surface-2);
+  }
+  .dp-nav__actions {
+    display: none;
+    align-items: center;
+    gap: 1rem;
+  }
+  .dp-nav__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--dp-font-heading);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--dp-white);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .dp-nav__phone:hover {
+    color: var(--dp-orange);
+  }
+  .dp-nav__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    background: var(--dp-orange);
+    color: #111;
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.65rem 1.35rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .dp-nav__cta-btn:hover {
+    background: var(--dp-orange-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+  }
+
+  /* Hamburger */
+  .dp-nav__toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: 1px solid var(--dp-border);
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 0;
+  }
+  .dp-nav__hamburger,
+  .dp-nav__hamburger::before,
+  .dp-nav__hamburger::after {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--dp-white);
+    border-radius: 2px;
+    position: relative;
+    transition: 0.3s;
+  }
+  .dp-nav__hamburger::before,
+  .dp-nav__hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+  .dp-nav__hamburger::before { top: -6px; }
+  .dp-nav__hamburger::after  { top: 6px; }
+
+  /* Mobile panel */
+  .dp-mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1001;
+  }
+  .dp-mobile-overlay.open { display: block; }
+  .dp-mobile-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: min(320px, 85vw);
+    height: 100dvh;
+    background: var(--dp-surface);
+    z-index: 1002;
+    transition: right 0.35s ease;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .dp-mobile-panel.open { right: 0; }
+  .dp-mobile-panel__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--dp-border);
+  }
+  .dp-mobile-panel__close {
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    color: var(--dp-gray);
+    cursor: pointer;
+    line-height: 1;
+  }
+  .dp-mobile-panel__body {
+    padding: 1rem 1.25rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .dp-mobile-panel__link {
+    display: block;
+    padding: 0.75rem 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--dp-white);
+    text-decoration: none;
+    border-bottom: 1px solid var(--dp-border);
+  }
+  .dp-mobile-panel__label {
+    display: block;
+    padding: 0.75rem 0 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--dp-orange);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .dp-mobile-panel__sublink {
+    display: block;
+    padding: 0.5rem 0 0.5rem 1rem;
+    font-size: 0.9rem;
+    color: var(--dp-gray);
+    text-decoration: none;
+  }
+  .dp-mobile-panel__sublink:hover { color: var(--dp-white); }
+  .dp-mobile-panel__cta {
+    display: block;
+    text-align: center;
+    padding: 0.85rem;
+    margin-top: 0.5rem;
+    font-family: var(--dp-font-heading);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--dp-white);
+    text-decoration: none;
+    border: 1px solid var(--dp-border);
+    border-radius: 8px;
+  }
+  .dp-mobile-panel__cta--fill {
+    background: var(--dp-orange);
+    color: #111;
+    border-color: var(--dp-orange);
+  }
+
+  /* ═══════════════════════════ HERO ═══════════════════════════ */
+  .dp-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--dp-bg);
+  }
+  .dp-hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .dp-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(17,17,17,0.7) 0%, rgba(17,17,17,0.85) 100%);
+    z-index: 1;
+  }
+  .dp-hero__inner {
+    position: relative;
+    z-index: 2;
+    max-width: var(--dp-max-width);
+    margin: 0 auto;
+    padding: calc(var(--dp-nav-height) + 3rem) 1.25rem 4rem;
+    text-align: center;
+  }
+  .dp-hero__content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .dp-hero__headline {
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--dp-white);
+    line-height: 1.08;
+    margin: 0 0 1.25rem;
+  }
+  .dp-hero__subline {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--dp-gray);
+    margin: 0 0 1.75rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .dp-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--dp-surface);
+    border: 1px solid var(--dp-border);
+    border-radius: 50px;
+    padding: 0.6rem 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    color: var(--dp-white);
+  }
+  .dp-hero__stars {
+    color: var(--dp-orange);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+  }
+  .dp-hero__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  /* ═══════════════════════════ SERVICES ═══════════════════════════ */
+  .dp-services {
+    padding: 6rem 0;
+    background: var(--dp-bg);
+  }
+  .dp-services__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .dp-service-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--dp-surface);
+    border: 1px solid var(--dp-border);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .dp-service-card:hover {
+    border-color: var(--dp-orange);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.15);
+    transform: translateY(-4px);
+  }
+  .dp-service-card__img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+  .dp-service-card__body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .dp-service-card__title {
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--dp-white);
+    margin: 0 0 0.6rem;
+  }
+  .dp-service-card__desc {
+    font-size: 0.9rem;
+    color: var(--dp-gray);
+    line-height: 1.6;
+    margin: 0 0 1rem;
+    flex: 1;
+  }
+  .dp-service-card__link {
+    font-family: var(--dp-font-heading);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--dp-orange);
+    transition: opacity 0.2s;
+  }
+  .dp-service-card:hover .dp-service-card__link { opacity: 0.8; }
+
+  /* ═══════════════════════════ FINANCING ═══════════════════════════ */
+  .dp-financing {
+    padding: 6rem 0;
+    background: var(--dp-surface);
+  }
+  .dp-financing__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .dp-financing__title {
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    color: var(--dp-white);
+    margin: 0 0 1.25rem;
+    line-height: 1.15;
+  }
+  .dp-financing__desc {
+    font-size: 1rem;
+    color: var(--dp-gray);
+    line-height: 1.7;
+    margin: 0 0 1.5rem;
+  }
+  .dp-financing__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+  }
+  .dp-financing__list li {
+    position: relative;
+    padding: 0.4rem 0 0.4rem 1.5rem;
+    color: var(--dp-white);
+    font-size: 0.95rem;
+  }
+  .dp-financing__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.75rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--dp-orange);
+  }
+  .dp-financing__badges {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .dp-trust-badge {
+    background: var(--dp-surface-2);
+    border: 1px solid var(--dp-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: border-color 0.3s;
+  }
+  .dp-trust-badge:hover {
+    border-color: var(--dp-orange);
+  }
+  .dp-trust-badge__icon {
+    margin-bottom: 0.75rem;
+  }
+  .dp-trust-badge__label {
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--dp-white);
+    margin: 0 0 0.4rem;
+  }
+  .dp-trust-badge__text {
+    font-size: 0.85rem;
+    color: var(--dp-gray);
+    margin: 0;
+  }
+
+  /* ═══════════════════════════ TESTIMONIALS ═══════════════════════════ */
+  .dp-testimonials {
+    padding: 6rem 0;
+    background: var(--dp-bg);
+  }
+  .dp-testimonials__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .dp-testimonials__cta {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+  .dp-review-card {
+    background: var(--dp-surface);
+    border: 1px solid var(--dp-border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: border-color 0.3s;
+  }
+  .dp-review-card:hover {
+    border-color: var(--dp-orange);
+  }
+  .dp-review-card__quote {
+    margin-bottom: 1rem;
+  }
+  .dp-review-card__text {
+    font-size: 0.95rem;
+    color: var(--dp-white);
+    line-height: 1.7;
+    margin: 0 0 1.25rem;
+    font-style: italic;
+  }
+  .dp-review-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .dp-review-card__name {
+    font-family: var(--dp-font-heading);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--dp-white);
+  }
+  .dp-review-card__stars {
+    display: flex;
+    gap: 2px;
+  }
+  .dp-star {
+    color: var(--dp-orange);
+    font-size: 1rem;
+  }
+
+  /* ═══════════════════════════ PROCESS ═══════════════════════════ */
+  .dp-process {
+    padding: 6rem 0;
+    background: var(--dp-surface);
+  }
+  .dp-process__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .dp-process-step {
+    background: var(--dp-surface-2);
+    border: 1px solid var(--dp-border);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: border-color 0.3s;
+  }
+  .dp-process-step:hover {
+    border-color: var(--dp-orange);
+  }
+  .dp-process-step__number {
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: var(--dp-orange);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .dp-process-step__title {
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--dp-white);
+    margin: 0 0 0.6rem;
+  }
+  .dp-process-step__desc {
+    font-size: 0.9rem;
+    color: var(--dp-gray);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ═══════════════════════════ ABOUT ═══════════════════════════ */
+  .dp-about {
+    padding: 6rem 0;
+    background: var(--dp-bg);
+  }
+  .dp-about__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .dp-about__title {
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    color: var(--dp-white);
+    margin: 0 0 1.25rem;
+    line-height: 1.15;
+  }
+  .dp-about__desc {
+    font-size: 1rem;
+    color: var(--dp-gray);
+    line-height: 1.7;
+    margin: 0 0 2rem;
+  }
+  .dp-about__stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  .dp-about__stat {
+    display: flex;
+    flex-direction: column;
+  }
+  .dp-about__stat-num {
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: var(--dp-orange);
+    line-height: 1;
+  }
+  .dp-about__stat-label {
+    font-size: 0.85rem;
+    color: var(--dp-gray);
+    margin-top: 0.3rem;
+  }
+  .dp-about__img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    max-height: 450px;
+    border: 1px solid var(--dp-border);
+  }
+
+  /* ═══════════════════════════ SERVICE AREAS ═══════════════════════════ */
+  .dp-areas {
+    padding: 6rem 0;
+    background: var(--dp-surface);
+  }
+  .dp-areas__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .dp-areas__cta {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+  .dp-area-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--dp-surface-2);
+    border: 1px solid var(--dp-border);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--dp-white);
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  .dp-area-card:hover {
+    border-color: var(--dp-orange);
+    background: rgba(255, 107, 53, 0.08);
+    transform: translateY(-2px);
+  }
+
+  /* ═══════════════════════════ VALUES ═══════════════════════════ */
+  .dp-values {
+    padding: 6rem 0;
+    background: var(--dp-bg);
+  }
+  .dp-values__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .dp-value-card {
+    background: var(--dp-surface);
+    border: 1px solid var(--dp-border);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: border-color 0.3s;
+  }
+  .dp-value-card:hover {
+    border-color: var(--dp-orange);
+  }
+  .dp-value-card__icon {
+    margin-bottom: 1rem;
+  }
+  .dp-value-card__title {
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--dp-white);
+    margin: 0 0 0.6rem;
+  }
+  .dp-value-card__desc {
+    font-size: 0.9rem;
+    color: var(--dp-gray);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ═══════════════════════════ FAQ ═══════════════════════════ */
+  .dp-faq {
+    padding: 6rem 0;
+    background: var(--dp-surface);
+  }
+  .dp-faq__list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .dp-faq__item {
+    background: var(--dp-surface-2);
+    border: 1px solid var(--dp-border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .dp-faq__item[open] {
+    border-color: var(--dp-orange);
+  }
+  .dp-faq__question {
+    padding: 1.25rem 1.5rem;
+    font-family: var(--dp-font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--dp-white);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .dp-faq__question::-webkit-details-marker { display: none; }
+  .dp-faq__question::after {
+    content: '+';
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--dp-orange);
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+  .dp-faq__item[open] .dp-faq__question::after {
+    content: '\2212';
+  }
+  .dp-faq__answer {
+    padding: 0 1.5rem 1.25rem;
+    font-size: 0.95rem;
+    color: var(--dp-gray);
+    line-height: 1.7;
+  }
+
+  /* ═══════════════════════════ BLOG ═══════════════════════════ */
+  .dp-blog {
+    padding: 6rem 0;
+    background: var(--dp-bg);
+  }
+  .dp-blog__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .dp-blog-card {
+    background: var(--dp-surface);
+    border: 1px solid var(--dp-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .dp-blog-card:hover {
+    border-color: var(--dp-orange);
+    transform: translateY(-4px);
+  }
+  .dp-blog-card__img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  .dp-blog-card__body {
+    padding: 1.5rem;
+  }
+  .dp-blog-card__tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--dp-orange);
+    margin-bottom: 0.6rem;
+  }
+  .dp-blog-card__title {
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--dp-white);
+    margin: 0 0 0.6rem;
+    line-height: 1.3;
+  }
+  .dp-blog-card__excerpt {
+    font-size: 0.88rem;
+    color: var(--dp-gray);
+    line-height: 1.6;
+    margin: 0 0 1rem;
+  }
+  .dp-blog-card__link {
+    font-family: var(--dp-font-heading);
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--dp-orange);
+  }
+
+  /* ═══════════════════════════ FOOTER CTA ═══════════════════════════ */
+  .dp-footer-cta {
+    padding: 6rem 0;
+    background: var(--dp-surface);
+    border-top: 1px solid var(--dp-border);
+    border-bottom: 1px solid var(--dp-border);
+  }
+  .dp-footer-cta__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .dp-footer-cta__headline {
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    color: var(--dp-white);
+    margin: 0 0 1.25rem;
+    line-height: 1.2;
+  }
+  .dp-footer-cta__sub {
+    font-size: 1rem;
+    color: var(--dp-gray);
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+  }
+  .dp-footer-cta__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--dp-orange);
+    text-decoration: none;
+  }
+  .dp-footer-cta__phone:hover {
+    opacity: 0.85;
+  }
+  .dp-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: var(--dp-surface-2);
+    border: 1px solid var(--dp-border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+  .dp-contact-form__input {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    font-family: var(--dp-font-body);
+    font-size: 0.92rem;
+    color: var(--dp-white);
+    background: var(--dp-bg);
+    border: 1px solid var(--dp-border);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+  }
+  .dp-contact-form__input::placeholder {
+    color: #666;
+  }
+  .dp-contact-form__input:focus {
+    border-color: var(--dp-orange);
+  }
+  .dp-contact-form__textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  .dp-contact-form__submit {
+    width: 100%;
+    justify-content: center;
+    font-size: 1rem;
+  }
+
+  /* ═══════════════════════════ FOOTER ═══════════════════════════ */
+  .dp-footer {
+    background: var(--dp-darkest);
+    padding: 4rem 0 0;
+  }
+  .dp-footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--dp-border);
+  }
+  .dp-footer__brand {
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--dp-white);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .dp-footer__tagline {
+    font-size: 0.88rem;
+    color: var(--dp-gray);
+    line-height: 1.6;
+    margin: 0 0 1rem;
+  }
+  .dp-footer__address {
+    font-size: 0.85rem;
+    color: var(--dp-gray);
+    margin: 0 0 0.5rem;
+  }
+  .dp-footer__phone,
+  .dp-footer__email {
+    display: block;
+    font-size: 0.88rem;
+    color: var(--dp-orange);
+    text-decoration: none;
+    margin-bottom: 0.3rem;
+  }
+  .dp-footer__phone:hover,
+  .dp-footer__email:hover {
+    opacity: 0.8;
+  }
+  .dp-footer__heading {
+    font-family: var(--dp-font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--dp-white);
+    margin: 0 0 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .dp-footer__link {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--dp-gray);
+    text-decoration: none;
+    padding: 0.25rem 0;
+    transition: color 0.2s;
+  }
+  .dp-footer__link:hover {
+    color: var(--dp-orange);
+  }
+  .dp-footer__bar {
+    padding: 1.5rem 0;
+    text-align: center;
+  }
+  .dp-footer__bar p {
+    font-size: 0.8rem;
+    color: #555;
+    margin: 0;
+  }
+
+  /* ═══════════════════════════ RESPONSIVE — 768px ═══════════════════════════ */
+  @media (min-width: 768px) {
+    .dp-services__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .dp-financing__grid {
+      grid-template-columns: 1.2fr 0.8fr;
+    }
+    .dp-financing__badges {
+      grid-template-columns: 1fr;
+    }
+    .dp-testimonials__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .dp-process__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .dp-about__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .dp-areas__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .dp-values__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .dp-blog__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .dp-footer-cta__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .dp-footer__grid {
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    }
+    .dp-hero__headline {
+      font-size: clamp(3rem, 5vw, 4.5rem);
+    }
+  }
+
+  /* ═══════════════════════════ RESPONSIVE — 1024px ═══════════════════════════ */
+  @media (min-width: 1024px) {
+    .dp-nav__toggle {
+      display: none;
+    }
+    .dp-nav__links {
+      display: flex;
+    }
+    .dp-nav__actions {
+      display: flex;
+    }
+    .dp-services__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .dp-testimonials__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .dp-process__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .dp-blog__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .dp-areas__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* ═══════════════════════════ RESPONSIVE — 1440px ═══════════════════════════ */
+  @media (min-width: 1440px) {
+    .dp-container {
+      max-width: 1360px;
+    }
+    .dp-hero__headline {
+      font-size: 4.5rem;
+    }
+    .dp-services__grid {
+      gap: 2rem;
+    }
+    .dp-testimonials__grid {
+      gap: 2rem;
+    }
+  }
+</style>

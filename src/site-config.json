@@ -1,0 +1,560 @@
+{
+  "business": {
+    "name": "Woody's SoftWash",
+    "phone": "+12104048514",
+    "category": "power washing",
+    "city": "San Antonio",
+    "state": "TX"
+  },
+  "design": {
+    "preset": {
+      "id": "power-washing-dark-premium",
+      "categoryGroup": "power-washing",
+      "name": "Dark Premium",
+      "recipeFile": "power-washing/dark-premium.astro",
+      "colors": {
+        "primary": "#7DD3FC",
+        "primaryDark": "#64a9ca",
+        "primaryLight": "#cbedfe",
+        "secondary": "#2A2A2A",
+        "accent": "#91dafc",
+        "background": "#1A1A1A",
+        "backgroundAlt": "#111111",
+        "surface": "#2A2A2A",
+        "text": "#F5F5F5",
+        "textLight": "#A0A0A0",
+        "textOnDark": "#FFFFFF",
+        "border": "#3A3A3A"
+      },
+      "typography": {
+        "headingFont": "Space Grotesk",
+        "headingWeight": "700",
+        "bodyFont": "Inter",
+        "bodyWeight": "400",
+        "headingStyle": "normal",
+        "scale": "1.2"
+      },
+      "shape": {
+        "borderRadius": "6px",
+        "buttonRadius": "6px",
+        "cardRadius": "10px",
+        "shadowStyle": "glow"
+      },
+      "sections": {
+        "heroStyle": "dark",
+        "sectionAlternation": [
+          "dark",
+          "surface",
+          "dark",
+          "surface",
+          "dark"
+        ],
+        "animationStyle": "fade",
+        "spacingScale": "balanced"
+      }
+    },
+    "recipeId": "power-washing/dark-premium"
+  },
+  "content": {
+    "homepage": {
+      "heroHeadline": "San Antonio's SoftWash Experts",
+      "heroSubline": "Gentle, effective cleaning for your home's exterior. Protecting your property and our environment.",
+      "aboutTitle": "Woody's SoftWash: Restoring Beauty, Protecting Value",
+      "aboutText": [
+        "Woody's SoftWash started with a simple goal: to provide San Antonio homes and businesses with a superior cleaning service that’s both effective and environmentally responsible. We noticed too many properties suffering from harsh power washing techniques that damaged surfaces and did little to prevent re-growth. That's why we embraced soft washing.",
+        "Our approach is built on understanding the unique challenges of the San Antonio climate and architecture. From the intense summer heat that fuels algae growth to the delicate stucco and limestone common in our historic neighborhoods, we tailor our methods to deliver exceptional results without causing harm. We use eco-friendly solutions and low-pressure techniques to gently lift away dirt, grime, and organic growth, leaving your property looking its best.",
+        "Woody's SoftWash is committed to serving our community. We believe in building lasting relationships with our clients, providing transparent communication, and exceeding expectations. We are fully licensed and insured, and we stand behind our work with a satisfaction guarantee. We're not just cleaning buildings; we're preserving the beauty and value of San Antonio."
+      ],
+      "valueProps": [
+        {
+          "title": "Safe & Gentle",
+          "description": "Low-pressure soft washing protects delicate surfaces like stucco and siding."
+        },
+        {
+          "title": "Eco-Friendly Solutions",
+          "description": "Our cleaning agents are biodegradable and safe for your family, pets, and plants."
+        },
+        {
+          "title": "Long-Lasting Results",
+          "description": "Eliminate mold, algae, and mildew at the source for a cleaner, healthier exterior."
+        },
+        {
+          "title": "Experienced Professionals",
+          "description": "Our team is trained and certified to deliver exceptional service every time."
+        }
+      ],
+      "ctaHeadline": "Get Your Free SoftWash Estimate Today!",
+      "ctaSubline": "Protect your property and enhance its curb appeal with Woody's SoftWash."
+    },
+    "services": [
+      {
+        "slug": "house-soft-washing",
+        "name": "House Soft Washing",
+        "shortDescription": "Gentle, effective cleaning for all types of siding.",
+        "description": "Woody's SoftWash uses a low-pressure cleaning method to safely and effectively remove dirt, algae, mold, and mildew from your home's exterior. Unlike traditional power washing, soft washing won't damage delicate surfaces like stucco, siding, or painted wood. Our eco-friendly cleaning solutions are specifically formulated to kill organic growth at the source, providing a longer-lasting clean.\n\nOur house soft washing service is ideal for San Antonio homes that are prone to algae and mildew growth due to our humid climate. We carefully assess your home's exterior to determine the best cleaning solution and technique. We pay close attention to details like window trim, gutters, and soffits, ensuring a thorough and consistent clean. \n\nWe understand that your home is your biggest investment, and we treat it with the utmost care and respect. Our team is trained to protect your landscaping and outdoor furniture during the cleaning process. We also offer a satisfaction guarantee, so you can be confident that you'll be happy with the results.",
+        "process": [
+          "Step 1: Thorough inspection of your home's exterior.",
+          "Step 2: Application of our eco-friendly cleaning solution.",
+          "Step 3: Gentle rinsing with low-pressure water.",
+          "Step 4: Final inspection to ensure complete satisfaction."
+        ],
+        "benefits": [
+          "Removes algae, mold, and mildew",
+          "Safe for all types of siding",
+          "Environmentally friendly",
+          "Long-lasting results"
+        ],
+        "faq": [
+          {
+            "question": "Will soft washing damage my plants?",
+            "answer": "No, our cleaning solutions are biodegradable and safe for plants. We also take precautions to protect your landscaping during the cleaning process."
+          },
+          {
+            "question": "How long does soft washing last?",
+            "answer": "Soft washing typically lasts 4-6 times longer than traditional power washing, as it kills the organic growth at the source."
+          },
+          {
+            "question": "Is soft washing safe for stucco?",
+            "answer": "Yes, soft washing is the preferred method for cleaning stucco, as it won't damage the delicate surface."
+          }
+        ]
+      },
+      {
+        "slug": "roof-cleaning",
+        "name": "Roof Cleaning",
+        "shortDescription": "Protect your roof and extend its lifespan with our gentle cleaning service.",
+        "description": "Black streaks and stains on your roof aren't just unsightly; they're a sign of algae growth that can damage your shingles and shorten the lifespan of your roof. Woody's SoftWash offers a safe and effective roof cleaning service that removes these stains and protects your investment.\n\nWe use a soft washing technique that's specifically designed for roofs. Our low-pressure system gently removes algae, moss, and lichen without damaging your shingles. Our eco-friendly cleaning solutions kill the organic growth at the source, preventing it from returning quickly.\n\nRegular roof cleaning can also improve your home's energy efficiency by reflecting sunlight more effectively. This can help lower your cooling costs during San Antonio's hot summer months. Don't let algae and moss damage your roof. Contact Woody's SoftWash today for a free estimate.",
+        "process": [
+          "Step 1: Assess the roof condition and identify areas of concern.",
+          "Step 2: Apply our specialized soft washing solution to the roof.",
+          "Step 3: Allow the solution to dwell and kill organic growth.",
+          "Step 4: Gently rinse the roof with low-pressure water."
+        ],
+        "benefits": [
+          "Removes algae, moss, and lichen",
+          "Extends the lifespan of your roof",
+          "Improves energy efficiency",
+          "Safe for all types of roofing materials"
+        ],
+        "faq": [
+          {
+            "question": "Will roof cleaning damage my shingles?",
+            "answer": "No, our soft washing technique is safe for all types of roofing materials, including asphalt shingles, tile, and metal."
+          },
+          {
+            "question": "How often should I have my roof cleaned?",
+            "answer": "We recommend having your roof cleaned every 2-3 years to prevent algae and moss growth."
+          },
+          {
+            "question": "Will roof cleaning affect my landscaping?",
+            "answer": "We take precautions to protect your landscaping during the roof cleaning process."
+          }
+        ]
+      },
+      {
+        "slug": "concrete-cleaning",
+        "name": "Concrete Cleaning",
+        "shortDescription": "Revitalize your driveways, patios, and sidewalks.",
+        "description": "Woody's SoftWash can restore the look of your concrete surfaces with our professional cleaning services. Over time, driveways, patios, and sidewalks can become stained with dirt, oil, and algae. Our concrete cleaning service removes these stains and revitalizes your outdoor spaces.\n\nWe use a combination of soft washing and pressure washing techniques to achieve the best results. Our eco-friendly cleaning solutions loosen dirt and grime, while our pressure washing equipment removes stubborn stains. We also offer sealing services to protect your concrete surfaces from future staining.\n\nWhether you have a small patio or a large driveway, Woody's SoftWash has the equipment and expertise to get the job done right. Contact us today for a free estimate.",
+        "process": [
+          "Step 1: Pre-treat stained areas with our cleaning solution.",
+          "Step 2: Pressure wash the concrete surface to remove dirt and grime.",
+          "Step 3: Rinse the surface thoroughly with clean water.",
+          "Step 4: Apply a sealant (optional) to protect the concrete."
+        ],
+        "benefits": [
+          "Removes dirt, oil, and algae",
+          "Revitalizes outdoor spaces",
+          "Protects concrete from future staining",
+          "Increases curb appeal"
+        ],
+        "faq": [
+          {
+            "question": "Will pressure washing damage my concrete?",
+            "answer": "When done properly, pressure washing is safe for concrete. We use the appropriate pressure settings and techniques to avoid damaging the surface."
+          },
+          {
+            "question": "How long does concrete cleaning last?",
+            "answer": "The lifespan of concrete cleaning depends on factors like the amount of traffic and exposure to the elements. Sealing can help extend the lifespan of the cleaning."
+          },
+          {
+            "question": "Can you remove oil stains from concrete?",
+            "answer": "Yes, our cleaning solutions are effective at removing oil stains from concrete."
+          }
+        ]
+      },
+      {
+        "slug": "fence-deck-cleaning",
+        "name": "Fence & Deck Cleaning",
+        "shortDescription": "Restore the natural beauty of your fence and deck.",
+        "description": "Woody's SoftWash offers fence and deck cleaning services to remove dirt, algae, and mildew, restoring the natural beauty of your outdoor spaces. Over time, fences and decks can become weathered and stained, detracting from your home's curb appeal.\n\nWe use a soft washing technique that's safe for all types of fencing and decking materials, including wood, composite, and vinyl. Our eco-friendly cleaning solutions gently remove dirt and grime without damaging the surface. We also offer staining and sealing services to protect your fence and deck from the elements.\n\nWhether you have a small wooden fence or a large composite deck, Woody's SoftWash has the equipment and expertise to get the job done right. Contact us today for a free estimate.",
+        "process": [
+          "Step 1: Inspect the fence or deck for damage and areas of concern.",
+          "Step 2: Apply our soft washing solution to the surface.",
+          "Step 3: Allow the solution to dwell and loosen dirt and grime.",
+          "Step 4: Gently rinse the surface with low-pressure water."
+        ],
+        "benefits": [
+          "Removes dirt, algae, and mildew",
+          "Restores the natural beauty of wood",
+          "Safe for all types of fencing and decking materials",
+          "Protects your investment"
+        ],
+        "faq": [
+          {
+            "question": "Will fence and deck cleaning damage the wood?",
+            "answer": "No, our soft washing technique is safe for all types of wood. We use low pressure and gentle cleaning solutions to avoid damaging the surface."
+          },
+          {
+            "question": "How often should I have my fence or deck cleaned?",
+            "answer": "We recommend having your fence or deck cleaned every 1-2 years to prevent algae and mildew growth."
+          },
+          {
+            "question": "Can you stain or seal my fence or deck after cleaning?",
+            "answer": "Yes, we offer staining and sealing services to protect your fence and deck from the elements."
+          }
+        ]
+      },
+      {
+        "slug": "gutter-cleaning",
+        "name": "Gutter Cleaning",
+        "shortDescription": "Keep your gutters flowing freely with our professional cleaning service.",
+        "description": "Clogged gutters can cause water damage to your home's foundation, roof, and siding. Woody's SoftWash offers professional gutter cleaning services to keep your gutters flowing freely and protect your investment.\n\nWe remove leaves, twigs, and other debris from your gutters and downspouts, ensuring that water can drain properly. We also inspect your gutters for damage and recommend repairs as needed. Regular gutter cleaning can prevent costly water damage and extend the lifespan of your gutters.\n\nDon't wait until your gutters are overflowing. Contact Woody's SoftWash today for a free estimate.",
+        "process": [
+          "Step 1: Remove all debris from gutters and downspouts by hand.",
+          "Step 2: Flush the gutters with water to ensure proper drainage.",
+          "Step 3: Inspect the gutters for damage and recommend repairs.",
+          "Step 4: Dispose of debris properly."
+        ],
+        "benefits": [
+          "Prevents water damage",
+          "Extends the lifespan of your gutters",
+          "Protects your home's foundation",
+          "Prevents pest infestations"
+        ],
+        "faq": [
+          {
+            "question": "How often should I have my gutters cleaned?",
+            "answer": "We recommend having your gutters cleaned at least twice a year, especially in the spring and fall."
+          },
+          {
+            "question": "Can clogged gutters cause water damage?",
+            "answer": "Yes, clogged gutters can cause water to overflow and damage your home's foundation, roof, and siding."
+          },
+          {
+            "question": "Do you offer gutter repair services?",
+            "answer": "Yes, we offer gutter repair services to fix any damage to your gutters."
+          }
+        ]
+      },
+      {
+        "slug": "commercial-soft-washing",
+        "name": "Commercial Soft Washing",
+        "shortDescription": "Exterior cleaning services for businesses and commercial properties.",
+        "description": "Woody's SoftWash provides exterior cleaning services for businesses and commercial properties in San Antonio and the surrounding areas. We understand that a clean exterior is essential for maintaining a professional image and attracting customers.\n\nWe offer a variety of commercial soft washing services, including building washing, concrete cleaning, and roof cleaning. Our team has the equipment and expertise to clean all types of commercial properties, from small retail stores to large office buildings.\n\nWe work with you to develop a customized cleaning plan that meets your specific needs and budget. Contact Woody's SoftWash today for a free estimate.",
+        "process": [
+          "Step 1: Conduct a site assessment to determine the cleaning needs.",
+          "Step 2: Develop a customized cleaning plan and schedule.",
+          "Step 3: Perform the soft washing services using eco-friendly solutions.",
+          "Step 4: Conduct a final inspection to ensure satisfaction."
+        ],
+        "benefits": [
+          "Maintains a professional image",
+          "Attracts customers",
+          "Protects your investment",
+          "Improves employee morale"
+        ],
+        "faq": [
+          {
+            "question": "Do you offer after-hours cleaning services?",
+            "answer": "Yes, we offer after-hours cleaning services to minimize disruption to your business."
+          },
+          {
+            "question": "Are you insured?",
+            "answer": "Yes, we are fully insured for your protection."
+          },
+          {
+            "question": "Can you clean large commercial buildings?",
+            "answer": "Yes, we have the equipment and expertise to clean all types of commercial properties."
+          }
+        ]
+      }
+    ],
+    "serviceAreas": [
+      {
+        "city": "New Braunfels",
+        "slug": "new-braunfels-tx",
+        "state": "TX",
+        "content": "Woody's SoftWash is proud to offer our professional power washing services to the residents and businesses of New Braunfels, TX. Known for its beautiful hill country stone homes and vibrant community, New Braunfels presents unique challenges and opportunities for exterior cleaning. We understand the importance of maintaining the pristine condition of your property, whether it's removing algae from your stone facade or cleaning your patio for outdoor entertaining. Our soft washing techniques are perfect for safely and effectively cleaning delicate surfaces without causing damage. \n\nWith the hot Texas summers, algae and mildew can quickly accumulate on your home's exterior. Woody's SoftWash uses eco-friendly cleaning solutions to combat these issues, ensuring a long-lasting clean that protects your investment. We are committed to providing exceptional service and customer satisfaction throughout New Braunfels, from the historic downtown area to the surrounding residential neighborhoods.",
+        "localContext": "New Braunfels, TX is a rapidly growing city in the Texas Hill Country, known for its German heritage, river recreation, and distinctive architecture.",
+        "nearbyAreas": [
+          "San Marcos",
+          "Cibolo",
+          "Schertz"
+        ]
+      },
+      {
+        "city": "Boerne",
+        "slug": "boerne-tx",
+        "state": "TX",
+        "content": "Woody's SoftWash provides expert power washing services to the discerning homeowners of Boerne, TX. Boerne's custom hill country homes require a delicate touch to maintain their beauty and value. We specialize in soft washing techniques that are safe for all types of siding, including stucco, stone, and wood. Our team is experienced in removing dirt, grime, and algae from your home's exterior, leaving it looking fresh and revitalized. \n\nThe hot Texas climate can take a toll on your property's exterior surfaces. Woody's SoftWash uses environmentally friendly cleaning solutions to protect your home from the elements and prevent future damage. From driveway cleaning to roof washing, we offer a comprehensive range of services to meet your needs. We are dedicated to providing exceptional customer service and ensuring your complete satisfaction.",
+        "localContext": "Boerne, TX is a charming town in the Texas Hill Country, known for its upscale residential developments and scenic landscapes.",
+        "nearbyAreas": [
+          "Fair Oaks Ranch",
+          "Leon Springs",
+          "Comfort"
+        ]
+      },
+      {
+        "city": "Schertz",
+        "slug": "schertz-tx",
+        "state": "TX",
+        "content": "Woody's SoftWash proudly serves the residents of Schertz, TX, including many military families stationed at nearby Randolph Air Force Base. We understand the unique needs of our community and are committed to providing reliable and affordable power washing services. From cleaning siding and fences to driveways and patios, we have the expertise and equipment to handle any job. Our soft washing techniques are safe for all types of surfaces and won't damage your property.\n\nSchertz experiences the full force of Texas summers, leading to rapid algae and mildew growth. Woody's SoftWash uses eco-friendly cleaning solutions to remove these unsightly stains and protect your home from further damage. We offer flexible scheduling and convenient service options to fit your busy lifestyle. We take pride in delivering exceptional results and exceeding your expectations.",
+        "localContext": "Schertz, TX is a growing city located northeast of San Antonio, known for its family-friendly atmosphere and proximity to Randolph Air Force Base.",
+        "nearbyAreas": [
+          "Cibolo",
+          "Universal City",
+          "Live Oak"
+        ]
+      },
+      {
+        "city": "San Antonio",
+        "slug": "san-antonio-tx",
+        "state": "TX",
+        "content": "Woody's SoftWash is your premier choice for power washing services in San Antonio, TX. From the historic Alamo to the vibrant Riverwalk, San Antonio is a city rich in history and culture. We understand the unique challenges of cleaning homes and businesses in this diverse environment. Our team is equipped to handle any job, from removing graffiti to cleaning stucco and brick. We are committed to providing exceptional service and customer satisfaction throughout the San Antonio metropolitan area. \n\nThe hot Texas sun and frequent rainfall can take a toll on your property's exterior. Woody's SoftWash uses eco-friendly cleaning solutions to combat these issues and protect your investment. We offer a wide range of services, including house washing, roof cleaning, and concrete cleaning. We are dedicated to preserving the beauty and integrity of San Antonio's buildings and homes.",
+        "localContext": "San Antonio, TX, a major city in south-central Texas, boasts a rich colonial heritage and is known for its Riverwalk, the Alamo, and vibrant cultural scene.",
+        "nearbyAreas": [
+          "Leon Valley",
+          "Alamo Heights",
+          "Terrell Hills"
+        ]
+      },
+      {
+        "city": "Cibolo",
+        "slug": "cibolo-tx",
+        "state": "TX",
+        "content": "Woody's SoftWash proudly serves the growing community of Cibolo, TX, providing top-notch power washing services for homes and businesses alike. As Cibolo continues to expand, maintaining the cleanliness and curb appeal of your property is more important than ever. We offer a comprehensive range of services, from house washing to driveway cleaning, ensuring your property looks its best. Our experienced technicians use safe and effective techniques to remove dirt, grime, and algae, leaving your surfaces sparkling clean.\n\nThe Texas climate can be harsh on exterior surfaces, leading to the buildup of unsightly stains and damage. Woody's SoftWash uses eco-friendly cleaning solutions to protect your property and prevent future problems. We are committed to providing exceptional customer service and exceeding your expectations in Cibolo and the surrounding areas.",
+        "localContext": "Cibolo, TX is a rapidly growing city northeast of San Antonio, known for its family-friendly atmosphere and convenient location.",
+        "nearbyAreas": [
+          "Schertz",
+          "Selma",
+          "Universal City"
+        ]
+      },
+      {
+        "city": "Universal City",
+        "slug": "universal-city-tx",
+        "state": "TX",
+        "content": "Woody's SoftWash is dedicated to providing quality power washing services in Universal City, TX. With a strong connection to Randolph Air Force Base, Universal City is a vibrant community with diverse needs. We offer a range of services tailored to meet those needs, including house washing, fence cleaning, and concrete restoration. Our team uses safe and effective techniques to remove dirt, grime, and algae, leaving your property looking its best.\n\nUniversal City's climate can be tough on exterior surfaces, leading to the buildup of unsightly stains and potential damage. Woody's SoftWash employs environmentally conscious cleaning solutions to safeguard your property and prevent future issues. We are committed to delivering superior customer service and surpassing your expectations in Universal City and the neighboring areas.",
+        "localContext": "Universal City, TX, located near San Antonio, is known for its close proximity to Randolph Air Force Base and its family-oriented community.",
+        "nearbyAreas": [
+          "Live Oak",
+          "Converse",
+          "Schertz"
+        ]
+      },
+      {
+        "city": "Leon Springs",
+        "slug": "leon-springs-tx",
+        "state": "TX",
+        "content": "Woody's SoftWash is proud to extend its professional power washing services to the residents and businesses of Leon Springs, TX. This historic area, known for its unique blend of old and new, presents unique challenges when it comes to exterior cleaning. We understand the importance of preserving the character of your property while ensuring it looks its best. Our soft washing techniques are gentle yet effective, removing dirt, grime, and algae without damaging delicate surfaces.\n\nThe Texas climate can be harsh on exterior surfaces, leading to the buildup of unsightly stains and potential damage. Woody's SoftWash employs environmentally conscious cleaning solutions to safeguard your property and prevent future issues. We are committed to delivering superior customer service and surpassing your expectations in Leon Springs and the neighboring areas.",
+        "localContext": "Leon Springs, TX, a historic district in San Antonio, blends old-world charm with modern amenities and is known for its unique local businesses.",
+        "nearbyAreas": [
+          "Fair Oaks Ranch",
+          "Helotes",
+          "The Dominion"
+        ]
+      },
+      {
+        "city": "Fair Oaks Ranch",
+        "slug": "fair-oaks-ranch-tx",
+        "state": "TX",
+        "content": "Woody's SoftWash is dedicated to serving the community of Fair Oaks Ranch, TX with top-quality power washing services. Known for its beautiful homes and sprawling landscapes, Fair Oaks Ranch requires a meticulous approach to exterior cleaning. We specialize in soft washing techniques that protect delicate surfaces while effectively removing dirt, grime, and algae. Our team is experienced in handling a variety of materials, including stone, stucco, and wood, ensuring your property looks its best.\n\nThe Texas climate can be demanding on exterior surfaces, contributing to unsightly stains and potential damage. Woody's SoftWash utilizes environmentally friendly cleaning solutions to protect your property and prevent further issues. We are committed to providing superior customer service and exceeding your expectations in Fair Oaks Ranch and surrounding communities.",
+        "localContext": "Fair Oaks Ranch, TX is an affluent community located northwest of San Antonio, known for its large properties, golf courses, and scenic landscapes.",
+        "nearbyAreas": [
+          "Boerne",
+          "Leon Springs",
+          "Helotes"
+        ]
+      },
+      {
+        "city": "Selma",
+        "slug": "selma-tx",
+        "state": "TX",
+        "content": "Woody's SoftWash offers professional power washing services to the residents and businesses of Selma, TX. As a rapidly growing city, Selma presents numerous opportunities and challenges for property maintenance. We understand the importance of keeping your home or business looking its best, and we are committed to providing reliable and affordable cleaning solutions. From house washing to concrete cleaning, we have the expertise and equipment to handle any job.\n\nSelma experiences the full force of Texas weather, which can lead to the rapid growth of algae and mildew. Woody's SoftWash uses eco-friendly cleaning solutions to remove these unsightly stains and protect your property from further damage. We offer flexible scheduling and convenient service options to fit your needs. We take pride in delivering exceptional results and exceeding your expectations in Selma and the surrounding areas.",
+        "localContext": "Selma, TX is a fast-growing city located northeast of San Antonio, known for its convenient location and family-friendly community.",
+        "nearbyAreas": [
+          "Schertz",
+          "Cibolo",
+          "Live Oak"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "name": "Maria G.",
+        "rating": 5,
+        "service": "House Soft Washing",
+        "text": "Woody's SoftWash did an amazing job cleaning my house! My siding was covered in algae, and now it looks brand new. The team was professional, efficient, and very careful with my landscaping. Highly recommend!",
+        "date": "2025-03-15"
+      },
+      {
+        "name": "David S.",
+        "rating": 4,
+        "service": "Roof Cleaning",
+        "text": "I had black streaks on my roof for years, and Woody's SoftWash completely removed them. The process was quick and easy, and my roof looks so much better. I'm very happy with the results.",
+        "date": "2025-04-02"
+      },
+      {
+        "name": "Jessica L.",
+        "rating": 5,
+        "service": "Concrete Cleaning",
+        "text": "My driveway was stained with oil and dirt, and Woody's SoftWash made it look like new again. They were on time, professional, and did a great job. I highly recommend their services.",
+        "date": "2025-04-18"
+      },
+      {
+        "name": "Robert B.",
+        "rating": 5,
+        "service": "Fence & Deck Cleaning",
+        "text": "Woody's SoftWash cleaned my wooden fence and deck, and they look amazing! The wood is so much brighter and cleaner. The team was very careful and did a thorough job. I'm very pleased with the results.",
+        "date": "2025-05-05"
+      },
+      {
+        "name": "Karen M.",
+        "rating": 4,
+        "service": "Gutter Cleaning",
+        "text": "Woody's SoftWash cleaned my gutters and removed all the leaves and debris. They were on time, efficient, and did a great job. I appreciate their attention to detail and would definitely use them again.",
+        "date": "2025-05-20"
+      },
+      {
+        "name": "Michael T.",
+        "rating": 5,
+        "service": "House Soft Washing",
+        "text": "Excellent service! Woody's SoftWash transformed the look of our house. The team was professional and courteous, and the results exceeded our expectations. We will definitely be using them again.",
+        "date": "2025-06-10"
+      }
+    ],
+    "seo": {
+      "homepage": {
+        "title": "Woody's SoftWash | San Antonio Power Washing",
+        "description": "Gentle & effective power washing in San Antonio. Safe roof & house cleaning. Free estimates. Call Woody's SoftWash today!"
+      },
+      "about": {
+        "title": "About Woody's SoftWash | San Antonio, TX",
+        "description": "Learn about Woody's SoftWash, San Antonio's trusted power washing experts. Our commitment to quality and customer satisfaction."
+      },
+      "services": {
+        "title": "San Antonio Power Washing Services | Woody's SoftWash",
+        "description": "Woody's SoftWash offers a range of power washing services in San Antonio, TX. House washing, roof cleaning, concrete cleaning, and more."
+      },
+      "contact": {
+        "title": "Contact Woody's SoftWash | San Antonio, TX",
+        "description": "Contact Woody's SoftWash for a free estimate on your power washing needs in San Antonio. Call us today!"
+      },
+      "reviews": {
+        "title": "Woody's SoftWash Reviews | San Antonio Power Washing",
+        "description": "Read reviews from satisfied Woody's SoftWash customers in San Antonio. See why we're the top choice for power washing services."
+      },
+      "service-areas": {
+        "title": "Woody's SoftWash Service Areas | San Antonio",
+        "description": "Woody's SoftWash provides power washing services in San Antonio and surrounding areas. Check our service area map for details."
+      }
+    },
+    "companyInfo": {
+      "yearsInBusiness": 12,
+      "projectsCompleted": "800+",
+      "satisfaction": "97%",
+      "teamSize": "20+"
+    }
+  },
+  "images": {
+    "hero": "/images/hero.webp",
+    "heroResponsive": {
+      "src": "/images/hero.webp",
+      "srcset": "/images/hero-400w.webp 400w, /images/hero-800w.webp 800w, /images/hero-1200w.webp 1200w, /images/hero.webp 1376w",
+      "sizes": "100vw",
+      "width": 1376,
+      "height": 768
+    },
+    "about": "/images/about.webp",
+    "aboutResponsive": {
+      "src": "/images/about.webp",
+      "srcset": "/images/about-400w.webp 400w, /images/about-800w.webp 800w, /images/about-1200w.webp 1200w, /images/about.webp 1200w",
+      "sizes": "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+      "width": 1200,
+      "height": 896
+    },
+    "services": {
+      "house-soft-washing": "/images/service-house-soft-washing.webp",
+      "roof-cleaning": "/images/service-roof-cleaning.webp",
+      "concrete-cleaning": "/images/service-concrete-cleaning.webp",
+      "fence-deck-cleaning": "/images/service-fence-deck-cleaning.webp",
+      "gutter-cleaning": "/images/service-gutter-cleaning.webp",
+      "commercial-soft-washing": "/images/service-commercial-soft-washing.webp"
+    },
+    "servicesResponsive": {
+      "house-soft-washing": {
+        "src": "/images/service-house-soft-washing.webp",
+        "srcset": "/images/service-house-soft-washing-400w.webp 400w, /images/service-house-soft-washing-800w.webp 800w, /images/service-house-soft-washing-1200w.webp 1200w, /images/service-house-soft-washing.webp 1264w",
+        "sizes": "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+        "width": 1264,
+        "height": 848
+      },
+      "roof-cleaning": {
+        "src": "/images/service-roof-cleaning.webp",
+        "srcset": "/images/service-roof-cleaning-400w.webp 400w, /images/service-roof-cleaning-800w.webp 800w, /images/service-roof-cleaning-1200w.webp 1200w, /images/service-roof-cleaning.webp 1264w",
+        "sizes": "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+        "width": 1264,
+        "height": 848
+      },
+      "concrete-cleaning": {
+        "src": "/images/service-concrete-cleaning.webp",
+        "srcset": "/images/service-concrete-cleaning-400w.webp 400w, /images/service-concrete-cleaning-800w.webp 800w, /images/service-concrete-cleaning-1200w.webp 1200w, /images/service-concrete-cleaning.webp 1264w",
+        "sizes": "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+        "width": 1264,
+        "height": 848
+      },
+      "fence-deck-cleaning": {
+        "src": "/images/service-fence-deck-cleaning.webp",
+        "srcset": "/images/service-fence-deck-cleaning-400w.webp 400w, /images/service-fence-deck-cleaning-800w.webp 800w, /images/service-fence-deck-cleaning-1200w.webp 1200w, /images/service-fence-deck-cleaning.webp 1264w",
+        "sizes": "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+        "width": 1264,
+        "height": 848
+      },
+      "gutter-cleaning": {
+        "src": "/images/service-gutter-cleaning.webp",
+        "srcset": "/images/service-gutter-cleaning-400w.webp 400w, /images/service-gutter-cleaning-800w.webp 800w, /images/service-gutter-cleaning-1200w.webp 1200w, /images/service-gutter-cleaning.webp 1264w",
+        "sizes": "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+        "width": 1264,
+        "height": 848
+      },
+      "commercial-soft-washing": {
+        "src": "/images/service-commercial-soft-washing.webp",
+        "srcset": "/images/service-commercial-soft-washing-400w.webp 400w, /images/service-commercial-soft-washing-800w.webp 800w, /images/service-commercial-soft-washing-1200w.webp 1200w, /images/service-commercial-soft-washing.webp 1264w",
+        "sizes": "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+        "width": 1264,
+        "height": 848
+      }
+    },
+    "gallery": [
+      "/images/gallery-0.webp",
+      "/images/gallery-1.webp"
+    ],
+    "galleryResponsive": [
+      {
+        "src": "/images/gallery-0.webp",
+        "srcset": "/images/gallery-0-400w.webp 400w, /images/gallery-0-800w.webp 800w, /images/gallery-0-1200w.webp 1200w, /images/gallery-0.webp 1200w",
+        "sizes": "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+        "width": 1200,
+        "height": 896
+      },
+      {
+        "src": "/images/gallery-1.webp",
+        "srcset": "/images/gallery-1-400w.webp 400w, /images/gallery-1-800w.webp 800w, /images/gallery-1-1200w.webp 1200w, /images/gallery-1.webp 1264w",
+        "sizes": "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+        "width": 1264,
+        "height": 848
+      }
+    ]
+  }
+}
